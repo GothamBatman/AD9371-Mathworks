@@ -20,11 +20,15 @@ build:2018_R1:
      - mkdir mltbx
      - ls *.mltbx
      - cp *.mltbx mltbx/
+     - mkdir logs
+     - ls test/*.log
+     - cp test/*.log logs/
     artifacts:
         paths:
             - hdl_wa_bsp/
             - mltbx/
             - deps/
+            - logs/
 
 # Future branches
 build:master:
@@ -53,9 +57,13 @@ test:2018_R1:
      - cd CI/scripts
      - make test
      - make zip
+     - mkdir logs
+     - ls test/*.log
+     - cp test/*.log logs/
     artifacts:
         paths:
             - zip/
+            - logs/
         reports:
             junit: test/BSPTestResults.xml
 
@@ -74,10 +82,14 @@ test_installer:2018_R1_Installer:
      - ls *.mltbx
      - cd CI/scripts
      - make test_installer
+     - mkdir logs
+     - ls test/*.log
+     - cp test/*.log logs/
     artifacts:
         paths:
             - mltbx/
             - zip/
+            - logs/
         reports:
             junit: test/BSPTestResults.xml
 
