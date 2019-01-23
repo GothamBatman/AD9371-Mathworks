@@ -52,7 +52,7 @@ test:2018_R1:
      - ./CI/scripts/dockermake test
      - ./CI/scripts/dockermake zip
      - mkdir logs
-     - cp test/*.log logs/ 2> /dev/null
+     - cp test/*.log logs/ || true
     artifacts:
         paths:
             - zip/
@@ -75,7 +75,7 @@ test_installer:2018_R1_Installer:
      - ls *.mltbx
      - ./CI/scripts/dockermake test_installer
      - mkdir logs
-     - cp test/*.log logs/ 2> /dev/null
+     - cp test/*.log logs/ || true
     artifacts:
         paths:
             - mltbx/
