@@ -37,6 +37,7 @@ vivado -mode batch -source scripts/pack_all_ips.tcl
 cd hdl/library/axi_i2s_adi/
 unzip analog.com_user_axi_i2s_adi_1.0.zip -d tmp
 rm analog.com_user_axi_i2s_adi_1.0.zip
+ls
 cp *.xml tmp/
 cd tmp
 zip -r analog.com_user_axi_i2s_adi_1.0.zip *
@@ -51,6 +52,7 @@ cd tmp
 zip -r analog.com_user_util_i2c_mixer_1.0.zip *
 cp analog.com_user_util_i2c_mixer_1.0.zip ../
 cd ../../../..
+
 
 # Move all cores
 vivado -mode batch -source scripts/copy_all_packed_ips.tcl
@@ -68,8 +70,10 @@ cp ip/*.zip hdl/library/
 # Update vivado version in MATLAB API and build script
 DEFAULT_V_VERSION='2017.4'
 cd ..
+echo "SED 1"
 grep -rl ${DEFAULT_V_VERSION} hdl_wa_bsp/vendor/AnalogDevices/+AnalogDevices | grep -v MODEM | xargs sed -i "s/${DEFAULT_V_VERSION}/$VIVADO/g"
 cd CI
+echo "SED 2"
 grep -rl ${DEFAULT_V_VERSION} hdl/projects/scripts | xargs sed -i "s/${DEFAULT_V_VERSION}/$VIVADOFULL/g"
 
 # Remove git directory move to bsp folder
@@ -85,4 +89,3 @@ rm vivado_*
 rm vivado.jou
 rm vivado.log
 rm -rf hdl
-
